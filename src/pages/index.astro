@@ -1,0 +1,33 @@
+---
+import Container from "@components/container.astro";
+import Cta from "@components/cta.astro";
+import Features from "@components/features.astro";
+import Hero from "@components/hero.astro";
+import Layout from "@layouts/Layout.astro";
+import AnimatedHero from "@components/AnimatedHero.astro";
+import InstallCommand from '../components/InstallCommand.astro';
+---
+
+<Layout title="">
+  <Container>
+    <Hero 
+      title="Build Agentic Systems with Ease" 
+      description="Python library for streamlined development of AI agent systems with backend integrations"
+    />
+    <div class="mt-4">
+      <InstallCommand />
+    </div>
+    <div class="mt-8">
+      <AnimatedHero />
+    </div>
+    <div class="max-w-3xl mx-auto text-center mt-12 mb-16">
+      <h2 class="text-4xl font-bold mb-6">Why Choose LirixAI?</h2>
+      <p class="text-lg text-slate-600">
+        Eliminate repetitive infrastructure setup and focus on building innovative AI agent systems. Our pre-built components handle the complex plumbing so you can ship faster.
+      </p>
+    </div>
+    <Features />
+  
+    <Cta />
+  </Container>
+</Layout>

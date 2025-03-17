@@ -1,0 +1,103 @@
+---
+// Search component for documentation
+---
+
+<div class="relative">
+  <input 
+    id="docsearch"
+    type="text" 
+    placeholder="Search documentation..." 
+    class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+  />
+  <kbd class="absolute right-3 top-3 px-2 py-1 text-sm text-gray-500 bg-gray-50 rounded">⌘K</kbd>
+  
+  <div id="search-results" class="absolute z-10 mt-2 w-full bg-white shadow-lg rounded-lg border border-gray-200 hidden">
+    <!-- Results will be populated here -->
+  </div>
+</div>
+
+<script>
+  // Search functionality
+  const searchIndex = [
+    { title: "Getting Started", path: "/documentation/getting-started", content: "Welcome to LirixAI! This is a Python library designed to simplify the development of agentic and multi-agentic systems..." },
+    { title: "How to Install", path: "/documentation/how-to-install", content: "Installing LirixAI is quick and easy. Follow the steps below to get started. To install LirixAI, run pip install lirixai..." },
+    { title: "Getting Help", path: "/documentation/getting-help", content: "If you need assistance with getting started with LirixAI or exploring advanced features, check out Discord Community, GitHub Issues..." },
+    { title: "Examples", path: "/documentation/examples", content: "Practical examples showing how to implement LirixAI in various scenarios and use cases..." },
+    { title: "Advanced Usage", path: "/documentation/advanced-usage", content: "Explore advanced features and techniques for getting the most out of LirixAI..." },
+    { title: "Configuration", path: "/documentation/configuration", content: "Learn how to configure LirixAI for different environments and requirements..." }
+    // Add more pages as needed
+  ];
+
+  const searchInput = document.getElementById('docsearch');
+  const searchResults = document.getElementById('search-results');
+
+  // Function to perform search
+  function performSearch(query) {
+    if (!query) {
+      searchResults.classList.add('hidden');
+      return;
+    }
+
+    const results = searchIndex.filter(item => 
+      item.title.toLowerCase().includes(query.toLowerCase()) || 
+      item.content.toLowerCase().includes(query.toLowerCase())
+    );
+
+    displayResults(results);
+  }
+
+  // Function to display results
+  function displayResults(results) {
+    searchResults.innerHTML = '';
+    
+    if (results.length === 0) {
+      searchResults.innerHTML = '<div class="p-4 text-gray-500">No results found</div>';
+      searchResults.classList.remove('hidden');
+      return;
+    }
+
+    results.forEach(result => {
+      const resultItem = document.createElement('a');
+      resultItem.href = result.path;
+      resultItem.className = 'block p-3 hover:bg-gray-50 border-b border-gray-100 last:border-0';
+      resultItem.innerHTML = `
+        <div class="font-medium text-blue-600">${result.title}</div>
+        <div class="text-sm text-gray-600 truncate">${result.content.substring(0, 100)}...</div>
+      `;
+      searchResults.appendChild(resultItem);
+    });
+
+    searchResults.classList.remove('hidden');
+  }
+
+  // Event listeners
+  searchInput.addEventListener('input', (e) => {
+    performSearch(e.target.value);
+  });
+
+  searchInput.addEventListener('focus', (e) => {
+    if (e.target.value) {
+      performSearch(e.target.value);
+    }
+  });
+
+  // Close search results when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+      searchResults.classList.add('hidden');
+    }
+  });
+
+  // Keyboard shortcut (Cmd+K or Ctrl+K)
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      searchInput.focus();
+    }
+    
+    // Close on escape
+    if (e.key === 'Escape') {
+      searchResults.classList.add('hidden');
+    }
+  });
+</script> 

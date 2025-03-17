@@ -1,0 +1,62 @@
+---
+// @ts-ignore
+import { Icon } from "astro-icon/components";
+
+const features = [
+  {
+    title: "Backend Integrations",
+    description: "Pre-configured connections to Supabase, Web Search APIs, and real-time protocols",
+    icon: "bx:code-curly"
+  },
+  {
+    title: "Memory Management",
+    description: "Automated database handling with embedded storage solutions",
+    icon: "bx:data"
+  },
+  {
+    title: "Multi-Agent Systems",
+    description: "Out-of-the-box tools for collaborative AI agent networks",
+    icon: "bx:network-chart"
+  },
+  {
+    title: "Web Search API",
+    description: "Integrated search capabilities for AI agent knowledge retrieval",
+    icon: "bx:search-alt"
+  },
+  {
+    title: "Real-Time Collaboration",
+    description: "WebRTC-powered communication for agent interactions",
+    icon: "bx:message-dots"
+  },
+  {
+    title: "Open Source Foundation",
+    description: "Flexible MIT-licensed framework for commercial use",
+    icon: "bx:code"
+  }
+];
+---
+
+<div class="max-w-3xl mx-auto text-center mt-16 mb-16">
+  <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight mb-6">
+    Everything You Need for AI Agent Development
+  </h2>
+  <p class="text-lg text-slate-600">
+    From memory management to real-time collaboration, LirixAI provides battle-tested components for production-ready systems.
+  </p>
+</div>
+
+<div class="grid sm:grid-cols-2 md:grid-cols-3 mt-16 gap-16">
+  {
+    features.map((item) => (
+      <div class="flex gap-4 items-start">
+        <div class="mt-1 bg-black rounded-full  p-2 w-8 h-8 shrink-0">
+          <Icon class="text-white" name={item.icon} />
+        </div>
+        <div>
+          <h3 class="font-semibold text-lg">{item.title}</h3>{" "}
+          <p class="text-slate-500 mt-2 leading-relaxed">{item.description}</p>
+        </div>
+      </div>
+    ))
+  }
+</div>

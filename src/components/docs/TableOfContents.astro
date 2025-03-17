@@ -1,0 +1,19 @@
+---
+export interface Props {
+  headings: Array<{ depth: number; slug: string; text: string }>;
+}
+
+const { headings = [] } = Astro.props;
+---
+
+<nav class="space-y-2 text-sm">
+  <h3 class="font-medium text-gray-900 mb-3">On this page</h3>
+  {headings.map((heading) => (
+    <a 
+      href={`#${heading.slug}`}
+      class={`block px-3 py-1 hover:text-blue-600 ${heading.depth === 3 ? 'ml-4' : ''} text-gray-700`}
+    >
+      {heading.text}
+    </a>
+  ))}
+</nav> 
